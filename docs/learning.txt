@@ -38,14 +38,6 @@ linux-drivers
 	-
 	-
 
-Types of Drivers
-----------------
->char device driver
->block device driver
->network device driver
->MTD map file
->Framebuffer driver
-
 
 Kernel Resources
 >printk
