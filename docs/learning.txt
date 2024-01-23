@@ -60,6 +60,37 @@ Kernel Resources
 	-
 	-
 	-
+
+Types of Drivers
+----------------
+>char device driver
+>block device driver
+>network device driver
+>MTD map file
+>Framebuffer driver	
+
+(i)		char drivers
+		------------
+	>major and minor
+	>file operations structure
+	>file structure
+	>inode structure (input node)
+	>char device registration
+	*older way char device registration
+	>open and release
+	>read and write
+	>read
+	>write
+	>readv/writev
+	>ioctl
+	>blocking i/o
+	>poll and select
+	>fsync
+	>fasync
+	>llseek
+	>access control on a device file
+
+	
 	-
 	-
 	-
