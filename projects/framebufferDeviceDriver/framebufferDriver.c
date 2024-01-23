@@ -43,3 +43,7 @@ struct fb_cmap {};
 struct list_head {};
 struct fb_ops {};
 struct device {};
+
+// init
+int register_frabebuffer(struct fb_info* fbinfo){return 0;}
+int unregister_framebuffer(struct fb_info* fbinfo){return 0;}
