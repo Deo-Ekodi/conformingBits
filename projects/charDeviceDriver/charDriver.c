@@ -29,7 +29,7 @@ struct file_operations{
     __kernel_ssize_t (*readv) (struct file*,const struct iovec*, unsigned long, __kernel_loff_t);
     __kernel_ssize_t (*writev) (struct file*,const struct iovec*, unsigned long, __kernel_loff_t);
     __kernel_ssize_t (*sendfile) (struct file*, __kernel_loff_t, size_t, /*,*/ void*); // read_actor_t
-    __kernel_ssize_t (*sendpage) (struct file*, struct page*, int, size_t, __loff_t*, int);
+    __kernel_ssize_t (*sendpage) (struct file*, struct page*, int, size_t, __kernel_loff_t*, int);
     unsigned long (*get_unmapped_area) (struct file*, unsigned long, unsigned);
     int (*check_flags) (int);
     int (*dir_notify) (struct file* flip, unsigned long);
