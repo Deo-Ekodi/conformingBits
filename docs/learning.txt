@@ -1,0 +1,56 @@
+linux-drivers
+-------------
+
+>Device Files
+	-Everything is a file(devices inclusive)
+	-devices are located in /dev direrctory
+	-devices have major / minor numbers (allocated statically in '''devices.txt''') and also dynamically
+	-user space is exposed to (char, block and network) devices and some are abstract
+	-
+	-
+	-
+	-
+	-
+>Major & Minor Numbers
+	-each device instance has major(char & block drivers) & minor numbers(device instance)
+	-minor number not recognized by kernel(only used by driver)
+	-
+	-
+> /proc & procfs
+	- '/proc' is a virtual filesystem of type procfs -> (all files & directories in /proc (exist in memory))
+	- '/proc' is used to import useful info from kernel - used byb subsystems, drivers & core functionality (just like a mess)
+	-
+	-
+> /sys & sysfs	
+	-new way of exporting kernel info to user-space
+	-will eventually replace /proc
+	-contains multiple views of same hardware :
+		>bus view(/sys/bus)
+		>device view(/sys/devices)
+		>class view(/sys/class)
+	-
+	-
+	-
+> /dev & udev	
+	-main repo for device nodes
+	-udev dynamically creates entries in /dev
+	-can be configured to provide persistent view
+	-
+	-
+
+Types of Drivers
+----------------
+>char device driver
+>block device driver
+>network device driver
+>MTD map file
+>Framebuffer driver
+
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
