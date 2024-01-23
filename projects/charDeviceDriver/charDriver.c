@@ -3,7 +3,8 @@
 #include <stdio.h>
 #include <linux/in.h>
 
-int register_chrdev(unsigned/*major number*/, const char*/*device name*/, struct file_operations);
+int register_chrdev(unsigned/*major number*/, const char*/*device name*/, struct file_operations*);
+int unregister_chrdrv(unsigned int, const char*);
 
 struct file_operations{
     struct module* owner;
@@ -34,3 +35,15 @@ struct file_operations{
     int (*dir_notify) (struct file* flip, unsigned long);
     int (*flock) (struct file*, int, struct file_lock*);
 };
+
+/**
+ * register a device
+ * return 0 upon successful registration
+*/
+register_chrdev(unsigned int val,const char* word, struct file_operations* fops){return 0;}
+
+/**
+ * unregister device
+ * remove char_dev
+*/
+unregister_chrdrv(unsigned int majorNo, const char* charDev){return 0;}
