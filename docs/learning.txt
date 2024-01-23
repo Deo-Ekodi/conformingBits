@@ -71,26 +71,97 @@ Types of Drivers
 
 (i)		char drivers
 		------------
-	>major and minor
+	>major and minor numbers
+		-available in <linux/fs.h>
+		-device nodes available in '/dev'
+		-major/minor tuples are provided for each device
+		-one major number(20 bit) 	= one device type
+		-minor number(12 bit)		= device instance
+		-kernel always ignores minor number
+		-device numbers are internally represented in 'dev_t'
+		-	<linux/kdev_t.h>
+		-these numbers can be statically or dynamically allocated
+		-deallocation must be done afterwards
+
 	>file operations structure
+		-provides connection between major and minor numbers to char driver callbacks
+		-	'''struct file_operations'''
+		-	<linux/fs.h>
+		-file_operations are actual implementation of main filesystem calls :
+			open, close, read, write ...
+		-NULL for unsupported calls
+
 	>file structure
-	>inode structure (input node)
+	-	<linux/fs.h>
+	-represents an open file
+	-released once all file instances are closed
+
+	>inode structure
+	-kernel internal representation of files
+	-access inode fields using macros
+	
 	>char device registration
-	*older way char device registration
+	-must allocate 'struct cdev' so kernel can call char device callbacks
+	-use a device-specific struct which contains 'struct cdev' as one of its elements
+	-Must set the owner
+	-Must add device to system (both ststic and dynamic)
+
+	>older way char device registration
+
 	>open and release
+	open should
+	-identify device being opened
+	-check for device-specific errors
+	-initialize device if first open
+	-update file_operations if necessary
+	release should
+	-close()
+	-shutdown device on last close
+
 	>read and write
+	-copy_to_user and copy_from_user		
+
 	>read
+	-interpretation of return value by user space
+	-bytes == count, transfer success
+	-count > bytes > 0, application retries
+	-bytes == o, end-of-file
+	-bytes < 0, errno => errno from <linux/errno.h>
+	-if data == NULL, read() should block
+
 	>write
+	-interpretation of return value by user space
+	-bytes == count, transfer success
+	-count > bytes > 0, application retries
+	-bytes == o, no error .. retry
+	-bytes < 0, errno => errno from <linux/errno.h>	
+
 	>readv/writev
+	-vector operations
+	-vectors contain : buffer + length value
+	-if missing, r/w are called multiple times by kernel
+	-easiest, have a loop in driver calling read/write
+
 	>ioctl
+	-must be able to control device with more than just read/write
+	-some implementations open unauditable back-doors to drivers
+	-	<linux/asm/ioctl,h>	// implements "magic numbers" split up in several bitfields
+	-
+
 	>blocking i/o
+	-what if a driver can't satisfy read() / write()?
+	-> it must be able to put calling process to sleep
+	-***
+	-
+	-
+	-----
 	>poll and select
 	>fsync
 	>fasync
 	>llseek
 	>access control on a device file
 
-	
+
 	-
 	-
 	-
