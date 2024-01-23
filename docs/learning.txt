@@ -46,6 +46,25 @@ Types of Drivers
 >MTD map file
 >Framebuffer driver
 
+
+Kernel Resources
+>printk
+	-equivalent of libc's printf()
+	>KERN_EMERG		- urgent messages before crash
+	>KERN_ALERT		- Alert for immediate action
+	>KERN_CRIT		- Critical issues
+	>KERN_ERR		- important error
+	>KERN_NOTICE	- normal
+	>KERN_WARNING	- non-critical warnings
+	>KERN_INFO		- informational
+	>KERN_DEBUG		- debugging messages
+
+	-since overuse of printk is unprofessional, use 'printk_ratelimit()' to moderate
+	-
+	-
+> /proc
+	-helps avoid syslog overhead
+	-seq files - <linux/seq_file.h>
 	-
 	-
 	-
@@ -53,4 +72,84 @@ Types of Drivers
 	-
 	-
 	-
-	------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	--
+	
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	-
+	---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
