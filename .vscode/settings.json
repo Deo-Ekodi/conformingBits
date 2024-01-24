@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "stdio.h": "c",
-        "genwqe_card.h": "c"
+        "genwqe_card.h": "c",
+        "types.h": "c"
     }
 }

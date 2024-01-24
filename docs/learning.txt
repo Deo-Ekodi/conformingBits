@@ -218,19 +218,120 @@ Types of Drivers
 (iii)	network drivers
 		===============
 	>introduction
+		-network devices have no '/dev' entry
+		-they use 'sockets' to communicate over "network"
+		-they receive data from outside world
+		-supports lot of configurations
+		-linux "net" subsystem is independent of network and hardware protocals
+		-network stack makes it possible to use IP and Ethernet Protocals
+
 	>connecting to the kernel
+		-device registration
+		-no major and minor numbers
+		-every interface detected must be registered as part of the system's list of recognized interfaces
+		-struct net_device		<linux/netdevice.h>
+		-struct net_device is a kobject
+		-allocate and initialize device
+		-module unloading(unregister)
+
 	>net_device structure
+		-global information
+		-hardware information
+		-helper functions for setting up interface information
+		-interface information
+		-features
+		-fundamental device methods -- open(), stop() ...
+		-optional device methods -- poll(), header_cache() ...
+		-utility fields
+
 	>open and close
+		-all done via ifconfig
+			...assign address to interface
+			...turn interface on
+		-open()
+			...retrieve MAC address from device
+			...set MAC address in 'struct net_device' (dev->dev_addr)
+			...start up device queue
+		-close()
+			...stop device queue
+
 	>packet transmission
+		-kernel signals transmission to driver
+		-packets are haanded over to driver with everything they need to travel over the network
+		-when transmitted packet is shorter than minimum size supported by device, zero-out the remainder to avoid security leaks
+
+		controlling transmission concurrency
+		-
+		-
+		-
+
+		transmission timeouts
+		-no need to setup timers
+		-handled by network subsystem
+		-if period is exceeded, tx_timeout() is called automatically
+		-
+		-
+
+		scatter/gather i/o
+		-helps avoid packet assembly
+		-allows zero copy
+		-checks whether packet is fragmented
+
 	>packet reception
+		-interrupt-driven mode (one interrupt per packet)
+		-polled (high bandwidth)
+
 	>interrupt handler
+		-caused by (link status change, transmission complete, new packet)
+		-on receipt .. check "packet reception"
+		-on send, deallocate transmitted buffer
+		-
+
 	>receive interrupt mitigation
+		-too many packets coming in rapidly
+		-too many interrupts generated
+		-kernel provides NAPI : New API
+		-NAPI provides polliing on device
+
 	>changes in link state
+		-changing carrier state
+		-checking carrier state
+
 	>socket buffers
+		-unit for packet travel in kernel
+		-important:
+			...device responsible for buffer
+			...packet header pointers
+			...actual packet length
+			...fragmented packet partition length if scatter/gather
+			...checksum policy for incoming packet
+			...packet type
+
 	>MAC address resolution
+		-ARP with ethernet - managed by kernel, no need for ethernet driver to do anything special
+		-overriding ARP - use Ethrrnet abstractions while avoiding ARP
+		-non-ethernet headers
+
 	>custom 'ioctl' commands
+		-	<linux/sockios.h>	contains already recognized commands
+		-ioctl commands not recognized by protoco are passsed back t driver
+
 	>statistical information
+		-
+		-
+		-
+		-
+
+	>multicast
+
 	>extras
+		-media independent interface support
+		-ethtool support
+		-netpoll - for remote debugging
+
+(iv)	PCI deivers
+		===========
+		
 	-
 	-
 	-
